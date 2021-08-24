@@ -3,9 +3,14 @@ package com.example.demo.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class User {
+    @OneToMany
+    private List<BlogPost> blogPostList;
+
     @Id
     @GeneratedValue
     Long id;
@@ -13,14 +18,17 @@ public class User {
     String password;
     Integer postCount;
 
+
+
     public User() {
     }
 
-    public User(Long id, String name, String password, Integer postCount) {
+    public User(Long id, String name, String password, Integer postCount, List<BlogPost> blogPostList) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.postCount = postCount;
+        this.blogPostList = blogPostList;
     }
 
     public Long getId() {
@@ -54,4 +62,8 @@ public class User {
     public void setPostCount(Integer postCount) {
         this.postCount = postCount;
     }
+
+    public List<BlogPost> getBlogPostList() { return blogPostList; }
+
+    public void setBlogPostList(List<BlogPost> blogPostList) { this.blogPostList = blogPostList; }
 }

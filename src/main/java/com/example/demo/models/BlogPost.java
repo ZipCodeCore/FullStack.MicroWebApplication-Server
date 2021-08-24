@@ -1,12 +1,16 @@
 package com.example.demo.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class BlogPost {
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
     @Id
     @GeneratedValue
     private Long id;
@@ -16,10 +20,11 @@ public class BlogPost {
     public BlogPost() {
     }
 
-    public BlogPost(Long id, String title, String imageUrl) {
+    public BlogPost(Long id, String title, String imageUrl, User user) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
+        this.user = user;
     }
 
     public Long getId() {
@@ -45,4 +50,8 @@ public class BlogPost {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
 }
