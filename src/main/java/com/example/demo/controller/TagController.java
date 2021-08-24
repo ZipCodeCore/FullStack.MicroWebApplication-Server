@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.service.TagService;
+import com.example.demo.models.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,34 +10,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/userController")
-public class UserController {
+@RequestMapping("/tagController")
+public class TagController {
 
     @Autowired
-    private UserService service;
+    private TagService service;
 
     @GetMapping(value = "/read/{id}")
-    public ResponseEntity<User> read(@PathVariable Long id){
+    public ResponseEntity<Tag> read(@PathVariable Long id){
         return new ResponseEntity<>(service.read(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/read")
-    public ResponseEntity<List<User>> readAll(){
+    public ResponseEntity<List<Tag>> readAll(){
         return new ResponseEntity<>(service.readAll(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<User> create(@RequestBody User user){
-        return new ResponseEntity<>(service.create(user), HttpStatus.CREATED);
+    public ResponseEntity<Tag> create(@RequestBody Tag tag){
+        return new ResponseEntity<>(service.create(tag), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
-        return new ResponseEntity<>(service.update(id, user), HttpStatus.OK);
+    public ResponseEntity<Tag> update(@PathVariable Long id, @RequestBody Tag tag){
+        return new ResponseEntity<>(service.update(id, tag), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<User> delete(@PathVariable Long id){
+    public ResponseEntity<Tag> delete(@PathVariable Long id){
         return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
     }
 }

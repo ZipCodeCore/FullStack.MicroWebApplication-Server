@@ -1,8 +1,7 @@
-package com.example.demo;
+package com.example.demo.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.models.Recipe;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Service;
 
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 

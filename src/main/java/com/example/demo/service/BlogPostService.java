@@ -1,10 +1,11 @@
-package com.example.demo;
+package com.example.demo.service;
 
+import com.example.demo.models.BlogPost;
+import com.example.demo.repository.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
