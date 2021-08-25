@@ -7,15 +7,14 @@ import javax.persistence.*;
 
 @Entity
 public class BlogPost {
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    private User user;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String imageUrl;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
 
     public BlogPost() {
     }
