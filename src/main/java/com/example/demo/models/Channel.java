@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 public class Channel {
-
+// Comment yo
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
