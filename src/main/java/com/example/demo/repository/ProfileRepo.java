@@ -1,4 +1,9 @@
 package com.example.demo.repository;
 
-public interface ProfileRepo {
+import com.example.demo.models.Profile;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProfileRepo extends JpaRepository<Profile, Long> {
 }
