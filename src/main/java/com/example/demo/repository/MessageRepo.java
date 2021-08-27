@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessageRepo extends JpaRepository<Message, Long> {
 
+
+    Iterable<Message> getMessageByChannel_Id(Long id);
+
 }
