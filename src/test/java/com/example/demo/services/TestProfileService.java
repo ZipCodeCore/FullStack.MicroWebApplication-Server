@@ -1,29 +1,25 @@
 package com.example.demo.services;
 
-import com.example.demo.DemoApplication;
-import com.example.demo.models.Channel;
 import com.example.demo.models.Profile;
 import com.example.demo.repository.ProfileRepo;
 import com.example.demo.service.ProfileService;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestProfileService {
@@ -31,22 +27,20 @@ public class TestProfileService {
     @Mock
     ProfileRepo repository;
 
-    @Mock
-    PasswordEncoder passwordEncoder;
-
     @InjectMocks
     ProfileService service;
+
+    @Mock
+    PasswordEncoder passwordEncoder;
 
     @Test
     public void createProfileTest() {
         Profile expectedProfile = new Profile();
-        expectedProfile.setUsername("test username");
-        expectedProfile.setPassword(passwordEncoder.encode("test password"));
 
-        Mockito.when(repository.save(Mockito.any(Profile.class))).thenReturn(new Profile());
-        Profile actualProfile = service.createProfile(expectedProfile);
+        service.createProfile(expectedProfile);
+        service.createProfile(expectedProfile);
 
-        Assert.assertEquals(expectedProfile.getFirstName(), actualProfile.getFirstName());
+        Mockito.verify(repository, Mockito.times(2)).save(Mockito.any(Profile.class));
     }
 
     @Test
@@ -55,7 +49,7 @@ public class TestProfileService {
         Profile expectedProfile = new Profile();
         expectedProfile.setId(id);
 
-        Mockito.when(repository.getById(id)).thenReturn(expectedProfile);
+        Mockito.when(repository.findById(id)).thenReturn(Optional.of(expectedProfile));
         Profile actualProfile = service.findById(id);
 
         Assert.assertEquals(expectedProfile.getId(), actualProfile.getId());
@@ -74,25 +68,25 @@ public class TestProfileService {
 
     @Test
     public void loginTest() {
-        Profile expectedProfile = new Profile();
+        Profile profile = new Profile();
         String username = "test username";
-        String password = passwordEncoder.encode("test password");
-        expectedProfile.setPassword(password);
-        expectedProfile.setUsername(username);
+        String password = "test password";
+        profile.setUsername(username); profile.setPassword(password);
 
-        Mockito.when(repository.findByUsernameAndPassword(username, password)).thenReturn(expectedProfile);
-        Profile actualProfile = service.login(username, password);
+        Mockito.when(repository.findByUsername(username)).thenReturn(profile);
+        service.login(username, password);
+        service.login(username, password);
 
-        Assert.assertEquals(expectedProfile.getUsername(), actualProfile.getUsername());
+        Mockito.verify(repository, Mockito.times(2)).findByUsername(username);
     }
 
     @Test
     public void updateTest() {
         Profile expectedProfile = new Profile();
         expectedProfile.setUsername("test username");
-        expectedProfile.setPassword(passwordEncoder.encode("test password"));
+        expectedProfile.setPassword("test password");
 
-        Mockito.when(repository.save(Mockito.any(Profile.class))).thenReturn(new Profile());
+        Mockito.when(repository.save(expectedProfile)).thenReturn(expectedProfile);
         Profile actualProfile = service.update(expectedProfile);
 
         Assert.assertEquals(expectedProfile.getFirstName(), actualProfile.getFirstName());

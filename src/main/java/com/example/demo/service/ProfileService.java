@@ -12,7 +12,7 @@ import java.util.List;
 public class ProfileService {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ProfileRepo repository;
@@ -29,7 +29,7 @@ public class ProfileService {
     }
 
     public Profile findById(Long id) {
-        return repository.getById(id);
+        return repository.findById(id).get();
     }
 
     public List<Profile> findAllProfiles() {
@@ -37,17 +37,22 @@ public class ProfileService {
     }
 
     public Profile login(String username, String password) {
-        String encodedPassword = passwordEncoder.encode(password);
-        return repository.findByUsernameAndPassword(username, encodedPassword);
+        Profile profileToCheckPassword = repository.findByUsername(username);
+        if (verifyPassword(password, profileToCheckPassword)) {
+            return profileToCheckPassword;
+        }
+        return null;
     }
 
     public Profile update(Profile profileData) {
         return repository.save(profileData);
     }
 
-    public Profile deleteProfileById(Long id) {
-        Profile profileToDelete = findById(id);
+    public void deleteProfileById(Long id) {
         repository.deleteById(id);
-        return profileToDelete;
+    }
+
+    private boolean verifyPassword(String password, Profile profile) {
+        return passwordEncoder.matches(password, profile.getPassword());
     }
 }

@@ -31,8 +31,8 @@ public class ProfileController {
         return new ResponseEntity<>(service.findAllProfiles(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/login")
-    public ResponseEntity<Profile> login(@RequestBody String username, @RequestBody String password) {
+    @GetMapping(value = "/login/{username}/{password}")
+    public ResponseEntity<Profile> login(@PathVariable String username, @PathVariable String password) {
         return new ResponseEntity<>(service.login(username, password), HttpStatus.OK);
     }
 
@@ -42,7 +42,8 @@ public class ProfileController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<Profile> deleteById(@PathVariable Long id) {
-        return new ResponseEntity<>(service.deleteProfileById(id), HttpStatus.OK);
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+        service.deleteProfileById(id);
+        return new ResponseEntity<>("Your Profile Has Been Deleted", HttpStatus.OK);
     }
 }
