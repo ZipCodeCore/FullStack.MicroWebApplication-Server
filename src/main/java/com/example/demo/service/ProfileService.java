@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.models.Profile;
 import com.example.demo.repository.ProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ public class ProfileService {
         profile.setUsername(profileData.getUsername());
         profile.setPassword(passwordEncoder.encode(profileData.getPassword()));
         profile.setEmail(profileData.getEmail());
-        profile.setChannelList(profileData.getChannelList());
+        profile.setChannels(profileData.getChannels());
         return repository.save(profile);
     }
 

@@ -18,7 +18,7 @@ public class TestProfile {
         Assert.assertNull(profile.getId()); Assert.assertNull(profile.getFirstName());
         Assert.assertNull(profile.getLastName()); Assert.assertNull(profile.getUsername());
         Assert.assertNull(profile.getPassword()); Assert.assertNull(profile.getEmail());
-        Assert.assertNull(profile.getChannelList());
+        Assert.assertNull(profile.getChannels()); Assert.assertNull(profile.getMessages());
     }
 
     @Test
@@ -31,15 +31,16 @@ public class TestProfile {
         String expectedPassword = "Secret";
         String expectedEmail = "bens@gmail.com";
         List<Channel> expectedChannels = Stream.of(new Channel(), new Channel(), new Channel(), new Channel()).collect(Collectors.toList());
+        List<Message> expectedMessages = Stream.of(new Message(), new Message(), new Message(), new Message()).collect(Collectors.toList());
 
         // When
-        Profile profile = new Profile(expectedId, expectedFirstName, expectedLastName, expectedUsername, expectedPassword, expectedEmail, expectedChannels);
+        Profile profile = new Profile(expectedId, expectedFirstName, expectedLastName, expectedUsername, expectedPassword, expectedEmail, expectedChannels, expectedMessages);
 
         // Then
         Assert.assertEquals(expectedId, profile.getId()); Assert.assertEquals(expectedFirstName, profile.getFirstName());
         Assert.assertEquals(expectedLastName, profile.getLastName()); Assert.assertEquals(expectedUsername, profile.getUsername());
         Assert.assertEquals(expectedPassword, profile.getPassword()); Assert.assertEquals(expectedEmail, profile.getEmail());
-        Assert.assertEquals(expectedChannels, profile.getChannelList());
+        Assert.assertEquals(expectedChannels, profile.getChannels()); Assert.assertEquals(expectedMessages, profile.getMessages());
     }
 
     @Test
@@ -52,6 +53,7 @@ public class TestProfile {
         String expectedPassword = "Secret";
         String expectedEmail = "bens@gmail.com";
         List<Channel> expectedChannels = Stream.of(new Channel(), new Channel(), new Channel(), new Channel()).collect(Collectors.toList());
+        List<Message> expectedMessages = Stream.of(new Message(), new Message(), new Message(), new Message()).collect(Collectors.toList());
         Profile profile = new Profile();
 
         // When
@@ -61,12 +63,13 @@ public class TestProfile {
         profile.setUsername(expectedUsername);
         profile.setPassword(expectedPassword);
         profile.setEmail(expectedEmail);
-        profile.setChannelList(expectedChannels);
+        profile.setChannels(expectedChannels);
+        profile.setMessages(expectedMessages);
 
         // Then
         Assert.assertEquals(expectedId, profile.getId()); Assert.assertEquals(expectedFirstName, profile.getFirstName());
         Assert.assertEquals(expectedLastName, profile.getLastName()); Assert.assertEquals(expectedUsername, profile.getUsername());
         Assert.assertEquals(expectedPassword, profile.getPassword()); Assert.assertEquals(expectedEmail, profile.getEmail());
-        Assert.assertEquals(expectedChannels, profile.getChannelList());
+        Assert.assertEquals(expectedChannels, profile.getChannels()); Assert.assertEquals(expectedMessages, profile.getMessages());
     }
 }

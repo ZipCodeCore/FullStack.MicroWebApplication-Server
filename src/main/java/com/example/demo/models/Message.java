@@ -1,11 +1,10 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.catalina.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,9 +13,16 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    @JsonIgnoreProperties("messages")
     Profile profile;
     String body;
     Date timestamp;
+    @ManyToOne
+    @JoinColumn(name = "channel_id")
+    @JsonIgnoreProperties("messages")
+    Channel channel;
 
 
     public Message() {

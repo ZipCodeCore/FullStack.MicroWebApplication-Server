@@ -1,5 +1,8 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,21 +17,32 @@ public class Profile {
     private String username;
     private String password;
     private String email;
-
-    @OneToMany
-    private List<Channel> channelList;
+    @ManyToMany
+    @JoinColumn(name = "channel_id", referencedColumnName = "id")
+    private List<Channel> channels;
+    @OneToMany(mappedBy = "profile")
+    List<Message> messages;
 
     public Profile() {
     }
 
-    public Profile(Long id, String firstName, String lastName, String username, String password, String email, List<Channel> channelList) {
+    public Profile(Long id, String firstName, String lastName, String username, String password, String email, List<Channel> channels, List<Message> messages) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.channelList = channelList;
+        this.channels = channels;
+        this.messages = messages;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public Long getId() {
@@ -79,11 +93,11 @@ public class Profile {
         this.email = email;
     }
 
-    public List<Channel> getChannelList() {
-        return channelList;
+    public List<Channel> getChannels() {
+        return channels;
     }
 
-    public void setChannelList(List<Channel> channelList) {
-        this.channelList = channelList;
+    public void setChannels(List<Channel> channels) {
+        this.channels = channels;
     }
 }
