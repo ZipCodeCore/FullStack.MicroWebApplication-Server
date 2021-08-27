@@ -14,6 +14,7 @@ public class BlogPost {
     private String title;
     private String imageUrl;
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private User user;
 
     public BlogPost() {
