@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.models.BlogPost;
+import com.example.demo.models.User;
 import com.example.demo.repository.BlogPostRepository;
+import com.example.demo.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +14,24 @@ import java.util.List;
 public class BlogPostService {
     @Autowired
     BlogPostRepository repository;
+    @Autowired
+    TagRepository tagRepository;
 
     public BlogPost create(BlogPost blogPost){return repository.save(blogPost);}
 
-    public BlogPost read(Long id){ return repository.findById(id).get();}
+    public BlogPost read(Long id){
+        BlogPost blogPost = repository.findById(id).get();
+        blogPost.setTags(tagRepository.findByBlogPost(id));
+        return blogPost;
+    }
 
     public List<BlogPost> readAll(){
         Iterable<BlogPost> blogPostsIterable = repository.findAll();
         List<BlogPost> result = new ArrayList<>();
         blogPostsIterable.forEach(result::add);
+        for(BlogPost blogPost : result) {
+            blogPost.setTags(tagRepository.findByBlogPost(blogPost.getId()));
+        }
         return result;
     }
 

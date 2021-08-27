@@ -3,6 +3,7 @@ package com.example.demo.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -63,4 +64,5 @@ public class Recipe {
     public BlogPost getBlogPost() { return blogPost; }
 
     public void setBlogPost(BlogPost blogPost) { this.blogPost = blogPost; }
+
 }

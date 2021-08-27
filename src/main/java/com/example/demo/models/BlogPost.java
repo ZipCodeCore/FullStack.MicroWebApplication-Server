@@ -4,6 +4,7 @@ package com.example.demo.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class BlogPost {
@@ -18,16 +19,19 @@ public class BlogPost {
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private User user;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Tag> tags;
 
     public BlogPost() {
     }
 
-    public BlogPost(Long id, String title, String imageUrl, Recipe recipe, User user) {
+    public BlogPost(Long id, String title, String imageUrl, Recipe recipe, User user, List<Tag> tags) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.recipe = recipe;
         this.user = user;
+        this.tags = tags;
     }
 
     public Long getId() {
@@ -61,4 +65,12 @@ public class BlogPost {
     public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }
