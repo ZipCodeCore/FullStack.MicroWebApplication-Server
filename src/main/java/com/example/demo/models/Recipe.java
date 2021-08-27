@@ -1,10 +1,8 @@
 package com.example.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Recipe {
@@ -14,16 +12,20 @@ public class Recipe {
     private String name;
     private String ingredients;
     private String instructions;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private BlogPost blogPost;
 
 
     public Recipe() {
     }
 
-    public Recipe(Long id, String name, String ingredients, String instructions) {
+    public Recipe(Long id, String name, String ingredients, String instructions, BlogPost blogPost) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.instructions = instructions;
+        this.blogPost = blogPost;
     }
 
     public Long getId() {
@@ -57,4 +59,8 @@ public class Recipe {
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
+
+    public BlogPost getBlogPost() { return blogPost; }
+
+    public void setBlogPost(BlogPost blogPost) { this.blogPost = blogPost; }
 }
