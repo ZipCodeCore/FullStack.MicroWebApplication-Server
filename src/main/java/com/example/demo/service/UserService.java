@@ -28,6 +28,9 @@ public class UserService {
         Iterable<User> userIterable = repository.findAll();
         List<User> result = new ArrayList<>();
         userIterable.forEach(result::add);
+        for(User user : result) {
+            user.setBlogPostList(blogPostRepository.findByUser(user.getId()));
+        }
         return result;
     }
 
