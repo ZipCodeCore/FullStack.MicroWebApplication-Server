@@ -18,7 +18,7 @@ public class Message {
    // @JsonIgnoreProperties("messages")
     Profile profile;
     String body;
-    Date timestamp;
+    String timestamp;
     @ManyToOne
     @JoinColumn(name = "channel_id")
     // @JsonIgnoreProperties("messages")
@@ -28,7 +28,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(Long id, Profile profile, String body, Date timestamp) {
+    public Message(Long id, Profile profile, String body, String timestamp) {
         this.id = id;
         this.profile = profile;
         this.body = body;
@@ -59,11 +59,11 @@ public class Message {
         this.body = body;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
