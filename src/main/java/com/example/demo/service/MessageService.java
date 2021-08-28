@@ -5,6 +5,9 @@ import com.example.demo.repository.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -19,6 +22,7 @@ public class MessageService {
 
 
     public Message create (Message message){
+        message.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         return messageRepo.save(message);
     }
 
