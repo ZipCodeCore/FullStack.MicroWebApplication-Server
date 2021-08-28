@@ -15,13 +15,13 @@ public class Message {
     Long id;
     @ManyToOne
     @JoinColumn(name = "profile_id")
-    @JsonIgnoreProperties("messages")
+   // @JsonIgnoreProperties("messages")
     Profile profile;
     String body;
     Date timestamp;
     @ManyToOne
     @JoinColumn(name = "channel_id")
-    @JsonIgnoreProperties("messages")
+    // @JsonIgnoreProperties("messages")
     Channel channel;
 
 
