@@ -46,11 +46,6 @@ public class ProfileController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-//    @GetMapping("/find/{username}")
-//    public ResponseEntity<Profile> findProfileByUsername(@PathVariable String username) {
-//        return new ResponseEntity<>(service.findByUsername(username), HttpStatus.OK);
-//    }
-
     @GetMapping(value = "/findAll")
     public ResponseEntity<List<Profile>> findAllProfiles() {
         return new ResponseEntity<>(service.findAllProfiles(), HttpStatus.OK);

@@ -67,20 +67,6 @@ public class TestProfileService {
     }
 
     @Test
-    public void loginTest() {
-        Profile profile = new Profile();
-        String username = "test username";
-        String password = "test password";
-        profile.setUsername(username); profile.setPassword(password);
-
-        Mockito.when(repository.findByUsername(username)).thenReturn(profile);
-        service.login(username, password);
-        service.login(username, password);
-
-        Mockito.verify(repository, Mockito.times(2)).findByUsername(username);
-    }
-
-    @Test
     public void updateTest() {
         Profile expectedProfile = new Profile();
         expectedProfile.setUsername("test username");
@@ -102,5 +88,53 @@ public class TestProfileService {
         service.deleteProfileById(id);
 
         Mockito.verify(repository, Mockito.times(2)).deleteById(id);
+    }
+
+    @Test
+    public void existsByUsernameTest() {
+        Profile profile = new Profile();
+        String username = "Ben";
+        profile.setUsername(username);
+
+        Mockito.when(repository.existsByUsername(username)).thenReturn(true);
+        boolean existsByUsername = service.existsByUsername(username);
+
+        Assert.assertTrue(existsByUsername);
+    }
+
+    @Test
+    public void existsByEmailTest() {
+        Profile profile = new Profile();
+        String email = "Ben@gmail.com";
+        profile.setEmail(email);
+
+        Mockito.when(repository.existsByEmail(email)).thenReturn(true);
+        boolean existsByEmail = service.existsByEmail(email);
+
+        Assert.assertTrue(existsByEmail);
+    }
+
+    @Test
+    public void findByUsernameTest() {
+        Profile expectedProfile = new Profile();
+        String username = "Ben";
+        expectedProfile.setUsername(username);
+
+        Mockito.when(repository.findByUsername(username)).thenReturn(expectedProfile);
+        Profile actualProfile = service.findByUsername(username);
+
+        Assert.assertEquals(expectedProfile, actualProfile);
+    }
+
+    @Test
+    public void loadByUsernameTest() {
+        Profile expectedProfile = new Profile();
+        String username = "Ben";
+        expectedProfile.setUsername(username);
+
+        Mockito.when(repository.findByUsername(username)).thenReturn(expectedProfile);
+        Profile actualProfile = (Profile) service.loadUserByUsername(username);
+
+        Assert.assertEquals(expectedProfile, actualProfile);
     }
 }

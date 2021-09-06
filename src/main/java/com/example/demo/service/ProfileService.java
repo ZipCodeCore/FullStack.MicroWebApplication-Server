@@ -65,23 +65,11 @@ public class ProfileService implements UserDetailsService {
         return repository.findAll();
     }
 
-    public Profile login(String username, String password) {
-        Profile profileToCheckPassword = repository.findByUsername(username);
-        if (verifyPassword(password, profileToCheckPassword)) {
-            return profileToCheckPassword;
-        }
-        return null;
-    }
-
     public Profile update(Profile profileData) {
         return repository.save(profileData);
     }
 
     public void deleteProfileById(Long id) {
         repository.deleteById(id);
-    }
-
-    private boolean verifyPassword(String password, Profile profile) {
-        return passwordEncoder.matches(password, profile.getPassword());
     }
 }
