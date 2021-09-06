@@ -34,7 +34,7 @@ public class TestProfile {
         List<Message> expectedMessages = Stream.of(new Message(), new Message(), new Message(), new Message()).collect(Collectors.toList());
 
         // When
-        Profile profile = new Profile(expectedId, expectedFirstName, expectedLastName, expectedUsername, expectedPassword, expectedEmail, expectedChannels, expectedMessages);
+        Profile profile = new Profile(expectedId, "", expectedFirstName, expectedLastName, expectedUsername, expectedPassword, expectedEmail, true, expectedChannels, expectedMessages);
 
         // Then
         Assert.assertEquals(expectedId, profile.getId()); Assert.assertEquals(expectedFirstName, profile.getFirstName());

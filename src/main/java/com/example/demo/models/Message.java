@@ -13,15 +13,15 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @ManyToOne
-    @JoinColumn(name = "profile_id")
-   // @JsonIgnoreProperties("messages")
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "profile_id",
+                referencedColumnName = "id")
     Profile profile;
     String body;
     String timestamp;
     @ManyToOne
-    @JoinColumn(name = "channel_id")
-    // @JsonIgnoreProperties("messages")
+    @JoinColumn(name = "channel_id",
+                referencedColumnName = "id")
     Channel channel;
 
 

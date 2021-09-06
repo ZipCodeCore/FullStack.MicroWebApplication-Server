@@ -1,10 +1,18 @@
 package com.example.demo.controller;
 
 import com.example.demo.models.Profile;
+import com.example.demo.security.JwtGenerator;
+import com.example.demo.security.LoginRequest;
+import com.example.demo.security.LoginResponse;
 import com.example.demo.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +22,22 @@ import java.util.List;
 public class ProfileController {
 
     @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtGenerator jwtGenerator;
+
+    @Autowired
     ProfileService service;
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Profile> createProfile(@RequestBody Profile profile) {
+    public ResponseEntity<?> createProfile(@RequestBody Profile profile) {
+        if (service.existsByUsername(profile.getUsername())) {
+            return ResponseEntity.badRequest().body("Username is taken");
+        }
+        if (service.existsByEmail(profile.getEmail())) {
+            return ResponseEntity.badRequest().body("Email is taken");
+        }
         return new ResponseEntity<>(service.createProfile(profile), HttpStatus.CREATED);
     }
 
@@ -26,14 +46,30 @@ public class ProfileController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
+//    @GetMapping("/find/{username}")
+//    public ResponseEntity<Profile> findProfileByUsername(@PathVariable String username) {
+//        return new ResponseEntity<>(service.findByUsername(username), HttpStatus.OK);
+//    }
+
     @GetMapping(value = "/findAll")
     public ResponseEntity<List<Profile>> findAllProfiles() {
         return new ResponseEntity<>(service.findAllProfiles(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/login/{username}/{password}")
-    public ResponseEntity<Profile> login(@PathVariable String username, @PathVariable String password) {
-        return new ResponseEntity<>(service.login(username, password), HttpStatus.OK);
+    @PostMapping(value = "/login/{username}/{password}")
+    public ResponseEntity<?> login(@PathVariable String username, @PathVariable String password) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(
+                        username, password));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtGenerator.generateToken(username);
+        Profile profile = service.findByUsername(username);
+        return new ResponseEntity<>(new LoginResponse(profile.getId(),
+                token, profile.getFirstName(), profile.getLastName(),
+                profile.getUsername(), profile.getEmail(),
+                profile.getChannels(), profile.getMessages())
+                , HttpStatus.OK);
     }
 
     @PutMapping(value = "/update")

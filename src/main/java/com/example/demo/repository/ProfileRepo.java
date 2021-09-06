@@ -9,4 +9,8 @@ public interface ProfileRepo extends JpaRepository<Profile, Long> {
     Profile findByUsernameAndPassword(String username, String password);
 
     Profile findByUsername(String username);
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
 }
