@@ -20,15 +20,14 @@ public class ProfileService implements UserDetailsService {
     @Autowired
     private ProfileRepo repository;
 
-    public Profile createProfile(Profile profileData) {
-        Profile profile = new Profile();
-        profile.setFirstName(profileData.getFirstName());
-        profile.setLastName(profileData.getLastName());
-        profile.setUsername(profileData.getUsername());
-        profile.setPassword(passwordEncoder.encode(profileData.getPassword()));
-        profile.setEnabled(true);
-        profile.setEmail(profileData.getEmail());
-        profile.setChannels(profileData.getChannels());
+    public Profile createProfile(Profile profile) {
+//        Profile profile = new Profile();
+//        profile.setFirstName(profileData.getFirstName());
+//        profile.setLastName(profileData.getLastName());
+//        profile.setUsername(profileData.getUsername());
+//        profile.setPassword(passwordEncoder.encode(profileData.getPassword()));
+//        profile.setEnabled(true);
+//        profile.setEmail(profileData.getEmail());
         return repository.save(profile);
     }
 

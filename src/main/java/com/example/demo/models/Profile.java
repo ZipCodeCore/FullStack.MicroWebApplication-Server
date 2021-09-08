@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,18 +24,22 @@ public class Profile implements UserDetails {
     private String password;
     private String email;
     private boolean enabled = true;
-    @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "profile_id"),
-               inverseJoinColumns = @JoinColumn(name = "channel_id"))
-    private List<Channel> channels;
-    @OneToMany(mappedBy = "profile")
-    @JsonIgnore
-    private List<Message> messages;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(joinColumns = @JoinColumn(name = "profile_id"),
+//               inverseJoinColumns = @JoinColumn(name = "channel_id"))
+//    private List<Channel> channels;
+//    @OneToMany(mappedBy = "profile")
+//    private List<Message> messages;
 
     public Profile() {
     }
 
-    public Profile(Long id, String token, String firstName, String lastName, String username, String password, String email, boolean enabled, List<Channel> channels, List<Message> messages) {
+    public Profile(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public Profile(Long id, String token, String firstName, String lastName, String username, String password, String email, boolean enabled) {
         this.id = id;
         this.token = token;
         this.firstName = firstName;
@@ -43,9 +48,31 @@ public class Profile implements UserDetails {
         this.password = password;
         this.email = email;
         this.enabled = enabled;
-        this.channels = channels;
-        this.messages = messages;
     }
+    //    public Profile(Long id, String token, String firstName, String lastName, String username, String password, String email, boolean enabled, List<Channel> channels) {
+//        this.id = id;
+//        this.token = token;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.username = username;
+//        this.password = password;
+//        this.email = email;
+//        this.enabled = enabled;
+//        this.channels = channels;
+//    }
+//
+//    public Profile(Long id, String token, String firstName, String lastName, String username, String password, String email, boolean enabled, List<Channel> channels, List<Message> messages) {
+//        this.id = id;
+//        this.token = token;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.username = username;
+//        this.password = password;
+//        this.email = email;
+//        this.enabled = enabled;
+//        this.channels = channels;
+//        this.messages = messages;
+//    }
 
     @Override
     public String getUsername() {
@@ -126,21 +153,13 @@ public class Profile implements UserDetails {
         this.enabled = enabled;
     }
 
-    public List<Channel> getChannels() {
-        return channels;
-    }
-
-    public void setChannels(List<Channel> channels) {
-        this.channels = channels;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+//    public List<Channel> getChannels() {
+//        return channels;
+//    }
+//
+//    public void setChannels(List<Channel> channels) {
+//        this.channels = channels;
+//    }
 
     public String getToken() {
         return token;
@@ -149,4 +168,12 @@ public class Profile implements UserDetails {
     public void setToken(String token) {
         this.token = token;
     }
+
+//    public List<Message> getMessages() {
+//        return messages;
+//    }
+//
+//    public void setMessages(List<Message> messages) {
+//        this.messages = messages;
+//    }
 }

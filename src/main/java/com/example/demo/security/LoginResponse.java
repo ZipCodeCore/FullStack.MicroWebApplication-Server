@@ -14,9 +14,8 @@ public class LoginResponse {
     private String username;
     private String email;
     private List<Channel> channels;
-    private List<Message> messages;
 
-    public LoginResponse(Long id, String token, String firstName, String lastName, String username, String email, List<Channel> channels, List<Message> messages) {
+    public LoginResponse(Long id, String token, String firstName, String lastName, String username, String email, List<Channel> channels) {
         this.id = id;
         this.token = token;
         this.firstName = firstName;
@@ -24,7 +23,15 @@ public class LoginResponse {
         this.username = username;
         this.email = email;
         this.channels = channels;
-        this.messages = messages;
+    }
+
+    public LoginResponse(Long id, String token, String firstName, String lastName, String username, String email) {
+        this.id = id;
+        this.token = token;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
     }
 
     public Long getId() {
@@ -81,13 +88,5 @@ public class LoginResponse {
 
     public void setChannels(List<Channel> channels) {
         this.channels = channels;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 }

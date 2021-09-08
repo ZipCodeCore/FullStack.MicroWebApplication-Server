@@ -25,6 +25,9 @@ public class ProfileController {
     AuthenticationManager authenticationManager;
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     JwtGenerator jwtGenerator;
 
     @Autowired
@@ -38,6 +41,7 @@ public class ProfileController {
         if (service.existsByEmail(profile.getEmail())) {
             return ResponseEntity.badRequest().body("Email is taken");
         }
+        profile.setPassword(passwordEncoder.encode(profile.getPassword()));
         return new ResponseEntity<>(service.createProfile(profile), HttpStatus.CREATED);
     }
 
@@ -62,9 +66,8 @@ public class ProfileController {
         Profile profile = service.findByUsername(username);
         return new ResponseEntity<>(new LoginResponse(profile.getId(),
                 token, profile.getFirstName(), profile.getLastName(),
-                profile.getUsername(), profile.getEmail(),
-                profile.getChannels(), profile.getMessages())
-                , HttpStatus.OK);
+                profile.getUsername(), profile.getEmail()
+                ), HttpStatus.OK);
     }
 
     @PutMapping(value = "/update")
