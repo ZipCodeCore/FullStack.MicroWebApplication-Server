@@ -3,13 +3,16 @@ package com.example.demo.service;
 import com.example.demo.models.Profile;
 import com.example.demo.repository.ProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProfileService {
+public class ProfileService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -17,14 +20,14 @@ public class ProfileService {
     @Autowired
     private ProfileRepo repository;
 
-    public Profile createProfile(Profile profileData) {
-        Profile profile = new Profile();
-        profile.setFirstName(profileData.getFirstName());
-        profile.setLastName(profileData.getLastName());
-        profile.setUsername(profileData.getUsername());
-        profile.setPassword(passwordEncoder.encode(profileData.getPassword()));
-        profile.setEmail(profileData.getEmail());
-        profile.setChannels(profileData.getChannels());
+    public Profile createProfile(Profile profile) {
+//        Profile profile = new Profile();
+//        profile.setFirstName(profileData.getFirstName());
+//        profile.setLastName(profileData.getLastName());
+//        profile.setUsername(profileData.getUsername());
+//        profile.setPassword(passwordEncoder.encode(profileData.getPassword()));
+//        profile.setEnabled(true);
+//        profile.setEmail(profileData.getEmail());
         return repository.save(profile);
     }
 
@@ -32,16 +35,33 @@ public class ProfileService {
         return repository.findById(id).get();
     }
 
-    public List<Profile> findAllProfiles() {
-        return repository.findAll();
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Profile profile = repository.findByUsername(username);
+        if (profile == null) {
+            throw new UsernameNotFoundException("Profile with username " + username + " not found");
+        }
+        return profile;
     }
 
-    public Profile login(String username, String password) {
-        Profile profileToCheckPassword = repository.findByUsername(username);
-        if (verifyPassword(password, profileToCheckPassword)) {
-            return profileToCheckPassword;
+    public Profile findByUsername(String username) {
+        Profile profile = repository.findByUsername(username);
+        if (profile == null) {
+            throw new UsernameNotFoundException("Profile with username " + username + " not found");
         }
-        return null;
+        return profile;
+    }
+
+    public boolean existsByUsername(String username) {
+        return repository.existsByUsername(username);
+    }
+
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
+    }
+
+    public List<Profile> findAllProfiles() {
+        return repository.findAll();
     }
 
     public Profile update(Profile profileData) {
@@ -50,9 +70,5 @@ public class ProfileService {
 
     public void deleteProfileById(Long id) {
         repository.deleteById(id);
-    }
-
-    private boolean verifyPassword(String password, Profile profile) {
-        return passwordEncoder.matches(password, profile.getPassword());
     }
 }

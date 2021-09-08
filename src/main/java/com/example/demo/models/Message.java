@@ -13,26 +13,25 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @ManyToOne
-    @JoinColumn(name = "profile_id")
-   // @JsonIgnoreProperties("messages")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
     Profile profile;
     String body;
     String timestamp;
-    @ManyToOne
-    @JoinColumn(name = "channel_id")
-    // @JsonIgnoreProperties("messages")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channel_id", referencedColumnName = "id")
     Channel channel;
 
 
     public Message() {
     }
 
-    public Message(Long id, Profile profile, String body, String timestamp) {
+    public Message(Long id, Profile profile, String body, String timestamp, Channel channel) {
         this.id = id;
         this.profile = profile;
         this.body = body;
         this.timestamp = timestamp;
+        this.channel = channel;
     }
 
     public Long getId() {
@@ -41,14 +40,6 @@ public class Message {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Profile getProfile() {
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
     }
 
     public String getBody() {
@@ -67,4 +58,19 @@ public class Message {
         this.timestamp = timestamp;
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
 }

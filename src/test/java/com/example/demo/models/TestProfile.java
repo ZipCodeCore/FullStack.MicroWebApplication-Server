@@ -18,7 +18,7 @@ public class TestProfile {
         Assert.assertNull(profile.getId()); Assert.assertNull(profile.getFirstName());
         Assert.assertNull(profile.getLastName()); Assert.assertNull(profile.getUsername());
         Assert.assertNull(profile.getPassword()); Assert.assertNull(profile.getEmail());
-        Assert.assertNull(profile.getChannels()); Assert.assertNull(profile.getMessages());
+//        Assert.assertNull(profile.getChannels());
     }
 
     @Test
@@ -34,13 +34,13 @@ public class TestProfile {
         List<Message> expectedMessages = Stream.of(new Message(), new Message(), new Message(), new Message()).collect(Collectors.toList());
 
         // When
-        Profile profile = new Profile(expectedId, expectedFirstName, expectedLastName, expectedUsername, expectedPassword, expectedEmail, expectedChannels, expectedMessages);
+        Profile profile = new Profile(expectedId, "", expectedFirstName, expectedLastName, expectedUsername, expectedPassword, expectedEmail, true);
 
         // Then
         Assert.assertEquals(expectedId, profile.getId()); Assert.assertEquals(expectedFirstName, profile.getFirstName());
         Assert.assertEquals(expectedLastName, profile.getLastName()); Assert.assertEquals(expectedUsername, profile.getUsername());
         Assert.assertEquals(expectedPassword, profile.getPassword()); Assert.assertEquals(expectedEmail, profile.getEmail());
-        Assert.assertEquals(expectedChannels, profile.getChannels()); Assert.assertEquals(expectedMessages, profile.getMessages());
+//        Assert.assertEquals(expectedChannels, profile.getChannels());
     }
 
     @Test
@@ -63,13 +63,12 @@ public class TestProfile {
         profile.setUsername(expectedUsername);
         profile.setPassword(expectedPassword);
         profile.setEmail(expectedEmail);
-        profile.setChannels(expectedChannels);
-        profile.setMessages(expectedMessages);
+//        profile.setChannels(expectedChannels);
 
         // Then
         Assert.assertEquals(expectedId, profile.getId()); Assert.assertEquals(expectedFirstName, profile.getFirstName());
         Assert.assertEquals(expectedLastName, profile.getLastName()); Assert.assertEquals(expectedUsername, profile.getUsername());
         Assert.assertEquals(expectedPassword, profile.getPassword()); Assert.assertEquals(expectedEmail, profile.getEmail());
-        Assert.assertEquals(expectedChannels, profile.getChannels()); Assert.assertEquals(expectedMessages, profile.getMessages());
+//        Assert.assertEquals(expectedChannels, profile.getChannels());
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.models.Channel;
+import com.example.demo.models.Profile;
 import com.example.demo.repository.ChannelRepo;
 import com.example.demo.repository.ProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ChannelService {
@@ -34,6 +36,23 @@ public class ChannelService {
         List<Channel> result = new ArrayList<>();
         channelIterable.forEach(result::add);
         return result;
+    }
+
+    public List<Channel> findByProfileUsername(String username) {
+        List<Channel> allChannels = readAllChannels();
+        return allChannels
+                .stream()
+                .filter(channel -> {
+                    List<Profile> profilesInChannel = channel.getProfileList();
+                    for (Profile profile : profilesInChannel) {
+                        if (profile.getUsername().equals(username)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
+
     }
 
     public Channel update(Long id, Channel channel) {

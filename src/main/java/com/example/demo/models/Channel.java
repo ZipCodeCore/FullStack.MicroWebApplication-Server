@@ -1,5 +1,8 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,10 +14,23 @@ public class Channel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "channels")
+    @Enumerated(value = EnumType.STRING)
+    private ChannelType type;
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Profile> profileList;
-    @OneToMany(mappedBy = "channel")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Message> messages;
+
+    public Channel() {
+    }
+
+    public Channel(Long id, String name, ChannelType type, List<Profile> profileList, List<Message> messages) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.profileList = profileList;
+        this.messages = messages;
+    }
 
     public Long getId() {
         return id;
@@ -46,5 +62,13 @@ public class Channel {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public ChannelType getType() {
+        return type;
+    }
+
+    public void setType(ChannelType type) {
+        this.type = type;
     }
 }
