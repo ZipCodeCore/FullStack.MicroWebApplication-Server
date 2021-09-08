@@ -19,7 +19,7 @@ public class WebsocketApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowCredentials(true).allowedOriginPatterns("*").allowedHeaders("*");
+                registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowCredentials(true).allowedOriginPatterns("*").allowedHeaders("*");
             }
         };
     }
