@@ -16,9 +16,9 @@ public class Channel {
     private String name;
     @Enumerated(value = EnumType.STRING)
     private ChannelType type;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "channels", fetch = FetchType.LAZY)
     private List<Profile> profileList;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Message> messages;
 
     public Channel() {
@@ -30,6 +30,11 @@ public class Channel {
         this.type = type;
         this.profileList = profileList;
         this.messages = messages;
+    }
+
+    public Channel(String name, ChannelType type) {
+        this.name = name;
+        this.type = type;
     }
 
     public Long getId() {

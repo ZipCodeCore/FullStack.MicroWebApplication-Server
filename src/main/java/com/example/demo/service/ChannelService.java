@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.models.Channel;
+import com.example.demo.models.ChannelType;
 import com.example.demo.models.Profile;
 import com.example.demo.repository.ChannelRepo;
 import com.example.demo.repository.ProfileRepo;
@@ -36,6 +37,18 @@ public class ChannelService {
         List<Channel> result = new ArrayList<>();
         channelIterable.forEach(result::add);
         return result;
+    }
+
+    public List<Channel> readAllChannelsByType(ChannelType type) {
+        return channelRepo.findByType(type);
+    }
+
+    public boolean existsByName(String name) {
+        return channelRepo.existsByName(name);
+    }
+
+    public Channel findByName(String name) {
+        return channelRepo.findByName(name);
     }
 
     public List<Channel> findByProfileUsername(String username) {
