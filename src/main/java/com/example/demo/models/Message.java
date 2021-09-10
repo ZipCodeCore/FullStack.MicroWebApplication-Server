@@ -18,7 +18,7 @@ public class Message {
 //    Profile profile;
     String profileSentFrom;
     String body;
-    String timestamp;
+    String timestamp = new Date().toString();
     String channelName;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "channel_id", referencedColumnName = "id")

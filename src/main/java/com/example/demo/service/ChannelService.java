@@ -51,22 +51,22 @@ public class ChannelService {
         return channelRepo.findByName(name);
     }
 
-    public List<Channel> findByProfileUsername(String username) {
-        List<Channel> allChannels = readAllChannels();
-        return allChannels
-                .stream()
-                .filter(channel -> {
-                    List<Profile> profilesInChannel = channel.getProfileList();
-                    for (Profile profile : profilesInChannel) {
-                        if (profile.getUsername().equals(username)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                })
-                .collect(Collectors.toList());
-
-    }
+//    public List<Channel> findByProfileUsername(String username) {
+//        List<Channel> allChannels = readAllChannels();
+//        return allChannels
+//                .stream()
+//                .filter(channel -> {
+//                    List<Profile> profilesInChannel = channel.getProfileList();
+//                    for (Profile profile : profilesInChannel) {
+//                        if (profile.getUsername().equals(username)) {
+//                            return true;
+//                        }
+//                    }
+//                    return false;
+//                })
+//                .collect(Collectors.toList());
+//
+//    }
 
     public Channel update(Long id, Channel channel) {
         Channel channelInDb = readChannel(id);

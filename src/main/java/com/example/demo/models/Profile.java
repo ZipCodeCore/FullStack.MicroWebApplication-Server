@@ -24,10 +24,10 @@ public class Profile implements UserDetails {
     private String password;
     private String email;
     private boolean enabled = true;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(joinColumns = @JoinColumn(name = "profile_id"),
-               inverseJoinColumns = @JoinColumn(name = "channel_id"))
-    private List<Channel> channels;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(joinColumns = @JoinColumn(name = "profile_id"),
+//               inverseJoinColumns = @JoinColumn(name = "channel_id"))
+//    private List<Channel> channels;
 //    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
 //    private List<Message> messages;
 
