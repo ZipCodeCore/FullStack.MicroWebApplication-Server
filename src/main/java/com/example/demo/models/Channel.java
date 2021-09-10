@@ -16,20 +16,32 @@ public class Channel {
     private String name;
     @Enumerated(value = EnumType.STRING)
     private ChannelType type;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Profile> profileList;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Message> messages;
+//    @ManyToMany(mappedBy = "channels", fetch = FetchType.LAZY)
+//    private List<Profile> profileList;
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Message> messages;
 
     public Channel() {
     }
 
-    public Channel(Long id, String name, ChannelType type, List<Profile> profileList, List<Message> messages) {
+//    public Channel(Long id, String name, ChannelType type, List<Profile> profileList, List<Message> messages) {
+//        this.id = id;
+//        this.name = name;
+//        this.type = type;
+//        this.profileList = profileList;
+//        this.messages = messages;
+//    }
+
+
+    public Channel(Long id, String name, ChannelType type) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.profileList = profileList;
-        this.messages = messages;
+    }
+
+    public Channel(String name, ChannelType type) {
+        this.name = name;
+        this.type = type;
     }
 
     public Long getId() {
@@ -48,21 +60,21 @@ public class Channel {
         this.name = name;
     }
 
-    public List<Profile> getProfileList() {
-        return profileList;
-    }
-
-    public void setProfileList(List<Profile> profileList) {
-        this.profileList = profileList;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+//    public List<Profile> getProfileList() {
+//        return profileList;
+//    }
+//
+//    public void setProfileList(List<Profile> profileList) {
+//        this.profileList = profileList;
+//    }
+//
+//    public List<Message> getMessages() {
+//        return messages;
+//    }
+//
+//    public void setMessages(List<Message> messages) {
+//        this.messages = messages;
+//    }
 
     public ChannelType getType() {
         return type;

@@ -28,6 +28,11 @@ public class MessageController {
         return new ResponseEntity<>(messageService.create(message), HttpStatus.CREATED);
     }
 
+    @GetMapping("/find/{channelName}")
+    public ResponseEntity<List<Message>> findByChannelName(@PathVariable String channelName) {
+        return new ResponseEntity<>(messageService.findByChannelName(channelName), HttpStatus.OK);
+    }
+
     @GetMapping(value = "/read/{id}")
     public ResponseEntity<Message> read(@PathVariable Long id ){
         return new ResponseEntity<>(messageService.read(id), HttpStatus.OK);

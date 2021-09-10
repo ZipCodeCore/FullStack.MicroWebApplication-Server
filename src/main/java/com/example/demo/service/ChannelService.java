@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.models.Channel;
+import com.example.demo.models.ChannelType;
 import com.example.demo.models.Profile;
 import com.example.demo.repository.ChannelRepo;
 import com.example.demo.repository.ProfileRepo;
@@ -38,22 +39,34 @@ public class ChannelService {
         return result;
     }
 
-    public List<Channel> findByProfileUsername(String username) {
-        List<Channel> allChannels = readAllChannels();
-        return allChannels
-                .stream()
-                .filter(channel -> {
-                    List<Profile> profilesInChannel = channel.getProfileList();
-                    for (Profile profile : profilesInChannel) {
-                        if (profile.getUsername().equals(username)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                })
-                .collect(Collectors.toList());
-
+    public List<Channel> readAllChannelsByType(ChannelType type) {
+        return channelRepo.findByType(type);
     }
+
+    public boolean existsByName(String name) {
+        return channelRepo.existsByName(name);
+    }
+
+    public Channel findByName(String name) {
+        return channelRepo.findByName(name);
+    }
+
+//    public List<Channel> findByProfileUsername(String username) {
+//        List<Channel> allChannels = readAllChannels();
+//        return allChannels
+//                .stream()
+//                .filter(channel -> {
+//                    List<Profile> profilesInChannel = channel.getProfileList();
+//                    for (Profile profile : profilesInChannel) {
+//                        if (profile.getUsername().equals(username)) {
+//                            return true;
+//                        }
+//                    }
+//                    return false;
+//                })
+//                .collect(Collectors.toList());
+//
+//    }
 
     public Channel update(Long id, Channel channel) {
         Channel channelInDb = readChannel(id);

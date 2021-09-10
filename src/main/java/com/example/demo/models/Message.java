@@ -13,25 +13,27 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    Profile profile;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+//    Profile profile;
+    String profileSentFrom;
     String body;
-    String timestamp;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_id", referencedColumnName = "id")
-    Channel channel;
+    String timestamp = new Date().toString();
+    String channelName;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "channel_id", referencedColumnName = "id")
+//    Channel channel;
 
 
     public Message() {
     }
 
-    public Message(Long id, Profile profile, String body, String timestamp, Channel channel) {
+    public Message(Long id, String profileSentFrom, String body, String timestamp, String channelName) {
         this.id = id;
-        this.profile = profile;
+        this.profileSentFrom = profileSentFrom;
         this.body = body;
         this.timestamp = timestamp;
-        this.channel = channel;
+        this.channelName = channelName;
     }
 
     public Long getId() {
@@ -58,19 +60,19 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public String getProfileSentFrom() {
+        return profileSentFrom;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setProfileSentFrom(String profileSentFrom) {
+        this.profileSentFrom = profileSentFrom;
     }
 
-    public Channel getChannel() {
-        return channel;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setChannel(Channel channel) {
-        this.channel = channel;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 }

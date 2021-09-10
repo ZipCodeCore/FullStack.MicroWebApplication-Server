@@ -36,10 +36,10 @@ public class ProfileController {
     @PostMapping(value = "/register")
     public ResponseEntity<?> createProfile(@RequestBody Profile profile) {
         if (service.existsByUsername(profile.getUsername())) {
-            return ResponseEntity.badRequest().body("Username is taken");
+            return new ResponseEntity<>("Username is taken", HttpStatus.OK);
         }
         if (service.existsByEmail(profile.getEmail())) {
-            return ResponseEntity.badRequest().body("Email is taken");
+            return new ResponseEntity<>("Email is taken", HttpStatus.OK);
         }
         profile.setPassword(passwordEncoder.encode(profile.getPassword()));
         return new ResponseEntity<>(service.createProfile(profile), HttpStatus.CREATED);

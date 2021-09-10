@@ -29,6 +29,16 @@ public class ChannelController {
         return new ResponseEntity<>(service.readChannel(id),HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/exists/{name}")
+    public ResponseEntity<Boolean> existsByName(@PathVariable String name) {
+        return new ResponseEntity<>(service.existsByName(name), HttpStatus.OK);
+    }
+
+    @GetMapping("find/{name}")
+    public ResponseEntity<Channel> findByName(@PathVariable String name) {
+        return new ResponseEntity<>(service.findByName(name), HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/readAll")
     public ResponseEntity<List<Channel>> readAllChannels() {
         return new ResponseEntity<>(service.readAllChannels(), HttpStatus.OK);
