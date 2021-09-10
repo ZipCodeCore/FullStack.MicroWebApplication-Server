@@ -26,6 +26,10 @@ public class MessageService {
         return messageRepo.save(message);
     }
 
+    public List<Message> findByChannelName(String channelName) {
+        return messageRepo.findByChannelName(channelName);
+    }
+
     public Message read(Long id){
         return messageRepo.getById(id);
     }
@@ -37,7 +41,10 @@ public class MessageService {
     public Message update(Long id, Message newMessageData){
         Message messageInDB = read(id);
         messageInDB.setBody(newMessageData.getBody());
-      //  messageInDB.setProfile(newMessageData.getProfile());
+
+        messageInDB.setProfileSentFrom(newMessageData.getProfileSentFrom());
+        messageInDB.setChannelName(newMessageData.getChannelName());
+
         messageInDB.setTimestamp(newMessageData.getTimestamp());
         messageRepo.save(messageInDB);
         return messageInDB;

@@ -16,8 +16,11 @@ public class Message {
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "profile_id", referencedColumnName = "id")
 //    Profile profile;
+
+    String profileSentFrom;
     String body;
-    String timestamp;
+    String timestamp = new Date().toString();
+    String channelName;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "channel_id", referencedColumnName = "id")
 //    Channel channel;
@@ -27,6 +30,14 @@ public class Message {
         this.id = id;
         this.body = body;
         this.timestamp = timestamp;
+    }
+
+    public Message(Long id, String profileSentFrom, String body, String timestamp, String channelName) {
+        this.id = id;
+        this.profileSentFrom = profileSentFrom;
+        this.body = body;
+        this.timestamp = timestamp;
+        this.channelName = channelName;
     }
 
     public Message() {
@@ -79,4 +90,19 @@ public class Message {
 //    public void setChannel(Channel channel) {
 //        this.channel = channel;
 //    }
+    public String getProfileSentFrom() {
+        return profileSentFrom;
+    }
+
+    public void setProfileSentFrom(String profileSentFrom) {
+        this.profileSentFrom = profileSentFrom;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
+    }
 }
