@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface MessageRepo extends JpaRepository<Message, Long> {
 
 
-    Iterable<Message> getMessageByChannel_Id(Long id);
+ //   Iterable<Message> getMessageByChannel_Id(Long id);
 
 }

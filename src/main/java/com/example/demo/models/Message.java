@@ -13,26 +13,32 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    Profile profile;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+//    Profile profile;
     String body;
     String timestamp;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_id", referencedColumnName = "id")
-    Channel channel;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "channel_id", referencedColumnName = "id")
+//    Channel channel;
 
+
+    public Message(Long id, String body, String timestamp) {
+        this.id = id;
+        this.body = body;
+        this.timestamp = timestamp;
+    }
 
     public Message() {
     }
 
-    public Message(Long id, Profile profile, String body, String timestamp, Channel channel) {
-        this.id = id;
-        this.profile = profile;
-        this.body = body;
-        this.timestamp = timestamp;
-        this.channel = channel;
-    }
+//    public Message(Long id, Profile profile, String body, String timestamp, Channel channel) {
+//        this.id = id;
+//        this.profile = profile;
+//        this.body = body;
+//        this.timestamp = timestamp;
+//        this.channel = channel;
+//    }
 
     public Long getId() {
         return id;
@@ -58,19 +64,19 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public Profile getProfile() {
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
-    public Channel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }
+//    public Profile getProfile() {
+//        return profile;
+//    }
+//
+//    public void setProfile(Profile profile) {
+//        this.profile = profile;
+//    }
+//
+//    public Channel getChannel() {
+//        return channel;
+//    }
+//
+//    public void setChannel(Channel channel) {
+//        this.channel = channel;
+//    }
 }

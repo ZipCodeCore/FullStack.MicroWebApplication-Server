@@ -37,7 +37,7 @@ public class MessageService {
     public Message update(Long id, Message newMessageData){
         Message messageInDB = read(id);
         messageInDB.setBody(newMessageData.getBody());
-        messageInDB.setProfile(newMessageData.getProfile());
+      //  messageInDB.setProfile(newMessageData.getProfile());
         messageInDB.setTimestamp(newMessageData.getTimestamp());
         messageRepo.save(messageInDB);
         return messageInDB;
