@@ -20,7 +20,8 @@
 	* withdraw money from each account
 	* transfer money to and from any 2 accounts
 
-[Accounts.pdf](https://github.com/Finance-Manager-Clone/FullStack.MicroWebApplication-Server/files/7818268/Accounts.pdf)
-[Deposit.pdf](https://github.com/Finance-Manager-Clone/FullStack.MicroWebApplication-Server/files/7818269/Deposit.pdf)
-[Tranfers.pdf](https://github.com/Finance-Manager-Clone/FullStack.MicroWebApplication-Server/files/7818271/Tranfers.pdf)
-[Transaction History.pdf](https://github.com/Finance-Manager-Clone/FullStack.MicroWebApplication-Server/files/7818272/Transaction.History.pdf)
+![Accounts-1](https://user-images.githubusercontent.com/92059008/148302805-e4321555-1521-4dc9-94e4-25574a3686a6.jpg)
+
+![Deposit-1](https://user-images.githubusercontent.com/92059008/148302892-01409c2e-8cc7-4874-b18a-bcbe80d8f2cb.jpg)
+![Tranfers-1](https://user-images.githubusercontent.com/92059008/148302915-304b85e2-3880-4029-acea-ae620c6dde85.jpg)
+![Transaction History-1](https://user-images.githubusercontent.com/92059008/148302925-256e2657-592d-4c95-aa2b-c04eb5fbbce8.jpg)
