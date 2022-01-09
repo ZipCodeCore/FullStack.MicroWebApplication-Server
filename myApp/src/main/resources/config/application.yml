@@ -181,7 +181,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: myApp@localhost
+    from: zipcodebanking@gmail.com
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/**
     management-include-pattern: ${server.servlet.context-path:}/management/**
