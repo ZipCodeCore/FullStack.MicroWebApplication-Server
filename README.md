@@ -26,7 +26,7 @@ Use Spring Initializr to create an starting point for you application
 ### TCP Application
 
 #### User Stories to Fulfill  
-* As a client, (not logged in) I
+* As a user, (logged in) I
     * can send messages to a _peer_.
 	* can view default channels
 	* can view all accessible channels
@@ -41,7 +41,10 @@ Use Spring Initializr to create an starting point for you application
 ### Blog Application
 
 #### User Stories to Fulfill  
-* As a client, (not logged in) I
+* As a user, (not logged in) I
+    * can view list of all blog posts
+    * can view blog posts filtered by blog-tag
+* As a user, (logged in) I
     * can create new blog posts
         * A blog post can consist of images and text
 	* can view list of all blog posts
@@ -57,10 +60,12 @@ Use Spring Initializr to create an starting point for you application
 ### Video Library Application
 
 #### User Stories to Fulfill  
-* As a client, (not logged in) I
+* As a user, (not logged in) I
+    * can view list of all videos
+* As a user, (logged in) I
     * can upload new videos
-	* can view list of all videos
-	* can post simple text-comments on a video
+    * can view list of all videos
+    * can post simple text-comments on a video
 
 
 
@@ -69,8 +74,9 @@ Use Spring Initializr to create an starting point for you application
 ### Money Management Application
 
 #### User Stories to Fulfill  
-* As a client, (not logged in) I
+* As a user, (not logged in) I
 	* can create new accounts
+* As a user, (logged in) I
 	* deposit money to each account
 	* withdraw money from each account
 	* transfer money to and from any 2 accounts
