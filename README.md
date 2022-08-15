@@ -13,19 +13,10 @@
 
 ### Installation
 
-Use Spring Initializr (or JHipster) to create an starting point for you application
-
-
-
-
-
-
+Use Spring Initializr (or JHipster) to create an starting point for your application
 
 
 ## Project Topics
-
-
-
 
 ### Blog Application (blogger clone)
 
