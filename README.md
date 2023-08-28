@@ -18,22 +18,6 @@ Use Spring Initializr (or JHipster) to create an starting point for your applica
 
 ## Project Topics
 
-### Blog Application (blogger clone)
-
-#### User Stories to Fulfill
-* As a user, (not logged in) I
-    * can view list of all blog posts
-    * can view blog posts filtered by blog-tag
-* As a user, (logged in) I
-    * can create new blog posts
-        * A blog post can consist of images and text
-	* can view list of all blog posts
-    * can view blog posts filtered by blog-tag
-	* can view new blog posts upon refreshing the DOM
-
-<hr>
-
-
 ### Document Editor and Library (google doc clone)
 
 #### User Stories to Fulfill
@@ -60,23 +44,6 @@ Use Spring Initializr (or JHipster) to create an starting point for your applica
     * can upload new videos
     * can view list of all videos
     * can post simple text-comments on a video
-
-
-<hr>
-
-### Twitter Application (twitter clone)
-
-#### User Stories to Fulfill  
-* As a user, (not logged in) I
-    * can view list of all tweets from all users
-* As a user, (logged in) I
-    * can post a new tweet (limited to 255 chars)
-    * can view list of all tweets
-    * can see tweets by a specific user
-    * can use "@" notation to direct a tweet to another user
-    * can add images to tweets
-    * all new tweets appear in timeline as they come in
-    * can search by "#" hashtags
 
 
 <hr>
@@ -111,7 +78,7 @@ Use Spring Initializr (or JHipster) to create an starting point for your applica
     
 <hr> 
 
-### Money Management Application
+### Money Management Application (like mint)
 
 #### User Stories to Fulfill  
 * As a user, (not logged in) I
@@ -120,7 +87,41 @@ Use Spring Initializr (or JHipster) to create an starting point for your applica
 	* deposit money to each account
 	* withdraw money from each account
 	* transfer money to and from any 2 accounts
-	
+
+<hr> 
+
+### Blog Application (blogger clone)
+
+#### User Stories to Fulfill
+* As a user, (not logged in) I
+    * can view list of all blog posts
+    * can view blog posts filtered by blog-tag
+* As a user, (logged in) I
+    * can create new blog posts
+        * A blog post can consist of images and text
+	* can view list of all blog posts
+    * can view blog posts filtered by blog-tag
+	* can view new blog posts upon refreshing the DOM
+
+<hr>
+
+### Twitter Application (twitter clone)
+
+#### User Stories to Fulfill  
+* As a user, (not logged in) I
+    * can view list of all tweets from all users
+* As a user, (logged in) I
+    * can post a new tweet (limited to 255 chars)
+    * can view list of all tweets
+    * can see tweets by a specific user
+    * can use "@" notation to direct a tweet to another user
+    * can add images to tweets
+    * all new tweets appear in timeline as they come in
+    * can search by "#" hashtags
+
+
+<hr>
+
 ### TCP Application
 
 #### User Stories to Fulfill  
