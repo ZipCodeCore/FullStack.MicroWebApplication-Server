@@ -6,10 +6,10 @@
 ## Developmental Notes
 ### Minimum Tech Stack
 * **Wireframe** - Mockflow
-* **Frontend** - Angular / React
-* **Business Logic** - Java
-* **Data Layer** - MySQL
-* **Cloud** - Heroku/AWS/Google
+* **Frontend** - Angular / React / VanillaJS
+* **Business Logic** - Java / REST / JPA
+* **Data Layer** - MySQL / Postgres
+* **Cloud** - Heroku/AWS/Google or `zipcode.rocks` hosting
 
 ### Installation
 
